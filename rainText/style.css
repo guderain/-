@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 定义两个变量，应用在根元素html上，这些变量可以在整个CSS文件中使用，以便在多个CSS规则中使用相同的颜色值 */
+:root{
+    --body-color:#181c1f;
+    --primary-color:#ffffff;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--body-color);
+}
+
+.container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    /* -webkit-box-reflect 设置镜像 第一个参数表示位置 第二个参数表示与原元素的间隔 第三个参数来设置虚实 */
+    -webkit-box-reflect:below 1px linear-gradient(transparent,transparent,transparent,transparent,#0005)
+}
+
+.cloud{
+    position: relative;
+    top: 50px;
+    /* 云朵 */
+    width:  320px;
+    height: 100px;
+    background-color: var(--primary-color);
+    border-radius: 100px;
+
+    /* 阴影 */
+    /* filter 属性可以用来模糊、颜色转换、缩放、旋转、倾斜、变形等等。filter 属性可以应用于所有元素，包括文本和背景。
+    drop-shadow() 函数是 filter 属性的一个函数，它可以为元素添加阴影效果。
+    blur()设置模糊，grayScale()设置灰度，saturate()设置饱和度。
+    drop-shadow() 函数可以接受四个参数，分别是阴影的水平偏移量、垂直偏移量、模糊半径和颜色。
+    这里表示添加一个水平和垂直偏移量都为 0，模糊半径为 30px，颜色为 var(--primary-color) 的阴影效果。 */
+    filter: drop-shadow(0 0 30px var(--primary-color));
+}
+
+.cloud::before{
+    /* 云朵的左边 */
+    content: '';
+    top: -50px;
+    left: 40PX;
+    width:  110px;
+    height: 110px;
+    position: absolute;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    /* 右边云 */
+    /* box-shadow 属性用于在元素的框架上添加阴影效果。X偏移量 Y偏移量 模糊半径 扩散半径 */
+    box-shadow: 90px 0 0 30px var(--primary-color);
+}
+
+.cloud .text{
+    position: absolute;
+    top: 40px;
+    height: 20px;
+    line-height: 20px;
+
+    text-transform: uppercase;
+    color: var(--primary-color);
+    /* 为文字设置多重阴影：水平偏移量为 0，垂直偏移量为 0，模糊半径为 5px 的 颜色为 var(--primary-color)*/
+    text-shadow: 0 0 5px var(--primary-color), 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+    transform-origin: bottom;
+    animation: animate 2s linear forwards;
+}
+
+@keyframes animate{
+    0% {
+        transform: translateX(0);
+    }
+
+    70% {
+        transform: translateY(290px);
+    }
+
+    100% {
+        transform: translateY(290px);
+    }
+}
